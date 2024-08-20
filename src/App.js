@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Homepage from "./components/Homepage";
 import Questions from "./components/Questions";
 import Answers from "./components/Answers";
+import QuizQuestions from "./data";
 
 function App() {
+  const [selectedOptions, setSelectedOptions] = useState({});
+
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className=" md:mt-8 flex items-center justify-center h-screen">
       <Routes>
         <Route exact path="/" element={<Homepage />} />
-        <Route path="/questions" element={<Questions />} />
-        <Route path="/answers" element={<Answers />} />
+        <Route
+          path="/questions"
+          element={
+            <Questions
+              selectedOptions={selectedOptions}
+              setSelectedOptions={setSelectedOptions}
+            />
+          }
+        />
+        <Route
+          path="/answers"
+          element={
+            <Answers
+              selectedOptions={selectedOptions}
+              quizQuestions={QuizQuestions}
+            />
+          }
+        />
       </Routes>
     </div>
   );
