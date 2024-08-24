@@ -10,6 +10,10 @@ import QuizQuestions from "./data";
 function App() {
   const [selectedOptions, setSelectedOptions] = useState({});
 
+  const resetSelectedOptions = () => {
+    setSelectedOptions({});
+  };
+
   return (
     <div className=" md:mt-8 flex items-center justify-center h-screen">
       <Routes>
@@ -29,6 +33,7 @@ function App() {
             <Answers
               selectedOptions={selectedOptions}
               quizQuestions={QuizQuestions}
+              onPlayAgain={resetSelectedOptions}
             />
           }
         />

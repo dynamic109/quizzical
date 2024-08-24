@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Answers({ selectedOptions, quizQuestions }) {
+function Answers({ selectedOptions, quizQuestions, onPlayAgain }) {
   const safeQuizQuestions = quizQuestions || [];
 
-  const correctAnswers = safeQuizQuestions.reduce((acc, question) => {
-    acc[question.id] = question.correctOption;
-    return acc;
+  const correctAnswers = safeQuizQuestions.reduce((accurate, question) => {
+    accurate[question.id] = question.correctOption;
+    return accurate;
   }, {});
 
   const score = safeQuizQuestions.reduce((total, question) => {
@@ -17,6 +17,16 @@ function Answers({ selectedOptions, quizQuestions }) {
     }
     return total;
   }, 0);
+
+  const getPaddingClass = (text) => {
+    if (text.length <= 5) {
+      return "px-6";
+    } else if (text.length <= 9) {
+      return "px-4";
+    } else {
+      return "px-2";
+    }
+  };
 
   return (
     <div className="w-full sm:px-1 px-8 md:w-7/12 h-screen pt-7">
@@ -47,7 +57,7 @@ function Answers({ selectedOptions, quizQuestions }) {
                   return (
                     <button
                       key={index}
-                      className={`py-1 sm:w-24 w-35 border-solid border-[1px] rounded-xl border-[#C9C3C3] ${backgroundColor}`}
+                      className={`py-1 px-1 sm:w-25 w-40 border-solid border-[1px] rounded-xl border-[#C9C3C3] ${backgroundColor}`}
                       disabled
                     >
                       {optionText}
@@ -61,10 +71,13 @@ function Answers({ selectedOptions, quizQuestions }) {
         );
       })}
 
-      <div>
+      <div className="text-center">
         <h3>You scored {score}/5 correct answers</h3>
         <Link to="/questions">
-          <button className=" p-3 mt-8 w-48 border-none rounded-2xl bg-[#4D5B9E] text-white">
+          <button
+            onClick={onPlayAgain}
+            className=" p-3 my-8 w-48 border-none rounded-2xl bg-[#4D5B9E] text-white"
+          >
             Play again
           </button>
         </Link>

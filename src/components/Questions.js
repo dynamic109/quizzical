@@ -52,7 +52,7 @@ function Questions({ selectedOptions, setSelectedOptions }) {
       {Quiz}
       <Link to={"/answers"}>
         <div className="text-center">
-          <button className="p-3 mt-3 w-56 border-none rounded-2xl bg-[#4D5B9E] text-white">
+          <button className="p-3 my-3 w-56 border-none rounded-2xl bg-[#4D5B9E] text-white">
             Check answers
           </button>
         </div>
